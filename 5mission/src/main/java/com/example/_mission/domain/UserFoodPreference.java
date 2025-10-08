@@ -21,8 +21,5 @@ public class UserFoodPreference {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(nullable = false, length = 50)
-    private String foodType; // ERD상 food_review 필드명을 food_type으로 해석
-
     private LocalDateTime createdAt;
 }

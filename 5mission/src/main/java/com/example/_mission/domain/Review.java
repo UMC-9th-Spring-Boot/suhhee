@@ -24,8 +24,7 @@ public class Review {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private Store store;
-
-    @Lob // TEXT 타입과 같이 긴 문자열을 위한 어노테이션
+    
     @Column(nullable = false)
     private String content;
 
