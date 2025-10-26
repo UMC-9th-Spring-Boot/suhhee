@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@IdClass(UserTermsAgreementId.class)
 public class UserTermsAgreement {
 
     @Id
