@@ -74,4 +74,8 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<UserMission> userMissionList = new ArrayList<>();
+
+    public enum Gender {
+        MALE, FEMALE, NONE
+    }
 }
