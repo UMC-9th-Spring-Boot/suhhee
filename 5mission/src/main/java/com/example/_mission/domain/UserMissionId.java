@@ -1,20 +1,18 @@
-// UserMissionId.java (새로 생성)
-
 package com.example._mission.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable; // 직렬화를 위해 import
+import java.io.Serializable;
 
 /**
  * UserMission 엔티티의 복합 키를 정의하기 위한 "헬퍼 클래스"
  * @ IdClass로 사용되려면 3가지 조건을 지켜야됨
  * 1. public 클래스여야됨
- * 2. Serializable 인터페이스를 구현(implements)
- * 3. 기본 생성자(NoArgsConstructor)가 존재
- * 4. equals(), hashCode() 메서드를 구현 (Lombok @EqualsAndHashCode)
+ * 2. Serializable 인터페이스를 구현
+ * 3. 기본 생성자(NoArgsConstructor) 존재
+ * 4. equals(), hashCode() 메서드 구현 (Lombok @EqualsAndHashCode)
  */
 @NoArgsConstructor // JPA가 사용할 기본 생성자
 @AllArgsConstructor // 편의를 위한 전체 필드 생성자

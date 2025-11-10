@@ -14,7 +14,7 @@ public enum GeneralErrorCode implements BaseErrorCode{
     // Member Error
     MEMBER_NOT_FOUND(HttpStatus.BAD_REQUEST,
             "MEMBER4001",
-            "사용자가 없습니다."),
+            "사용자가 없습니다."),      //
     // Member Error
     NICKNAME_NOT_EXIST(HttpStatus.BAD_REQUEST,
             "MEMBER4002",
@@ -36,6 +36,10 @@ public enum GeneralErrorCode implements BaseErrorCode{
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND,
             "ARTICLE4001",
             "게시글이 없습니다."),
+
+    VALID_FAIL(HttpStatus.BAD_REQUEST,
+            "VALID400_1",
+            "검증에 실패했습니다."),
 
 
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR,

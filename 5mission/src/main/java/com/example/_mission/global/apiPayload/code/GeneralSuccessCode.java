@@ -22,7 +22,8 @@ public enum GeneralSuccessCode implements BaseSuccessCode {
             "COMMON200",
             "성공적으로 요청을 처리했습니다."),
     CREATED(HttpStatus.CREATED,
-            "COMMON201","성공적으로 생성되었습니다.");
+            "COMMON201","성공적으로 생성되었습니다."),
+    ;
 
     // Enum의 필드
     private final HttpStatus status;
