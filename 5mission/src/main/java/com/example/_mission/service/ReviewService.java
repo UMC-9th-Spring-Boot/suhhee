@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
-    private final UserRepository userRepository; // 5. UserRepository 주입
+    private final UserRepository userRepository; // UserRepository 주입
     private static final QReview review = QReview.review;
 
     // 반환 타입은 Page<ReviewDto>로 동일

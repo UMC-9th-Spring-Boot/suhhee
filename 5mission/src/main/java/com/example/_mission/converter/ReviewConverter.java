@@ -5,8 +5,11 @@ import com.example._mission.domain.Store;
 import com.example._mission.domain.User;
 import com.example._mission.dto.ReviewReqDTO;
 import com.example._mission.dto.ReviewResDTO;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReviewConverter {
 
@@ -22,11 +25,38 @@ public class ReviewConverter {
                 .build();
     }
 
-    // 2. Entity -> DTO 변환 (응답용)
+    // Entity -> DTO 변환 (응답용)
     public static ReviewResDTO.AddReviewDTO toAddReviewDTO(Review review) {
         return ReviewResDTO.AddReviewDTO.builder()
                 .reviewId(review.getId())
                 .createdAt(review.getCreatedAt())
+                .build();
+    }
+    // 리뷰(Entity) -> 리뷰 미리보기 DTO
+    public static ReviewResDTO.ReviewPreViewDTO toReviewPreViewDTO(Review review){
+        return ReviewResDTO.ReviewPreViewDTO.builder()
+                .ownerNickname(review.getUser().getNickname())  // JPA가 테이블의 연관관계를 파악하고 연관성이 있으면 불러올 수 있는 기능을 제공하기에 member 요소를 가져올 수 있는거.. (워크북 9장)
+                .score(review.getStar())
+                .body(review.getContent())
+                .createdAt(review.getCreatedAt().toLocalDate())
+                .build();
+    }
+
+    // 리뷰 페이지(Page<Review>) -> 리뷰 목록 응답 DTO
+    public static ReviewResDTO.ReviewPreViewListDTO toReviewPreViewListDTO(Page<Review> reviewPage){
+
+        // Review들 -> DTO로 변환 (Stream 사용)
+        List<ReviewResDTO.ReviewPreViewDTO> reviewPreViewDTOList = reviewPage.getContent().stream()
+                .map(ReviewConverter::toReviewPreViewDTO)
+                .collect(Collectors.toList());
+
+        return ReviewResDTO.ReviewPreViewListDTO.builder()
+                .isLast(reviewPage.isLast())
+                .isFirst(reviewPage.isFirst())
+                .totalPage(reviewPage.getTotalPages())
+                .totalElements(reviewPage.getTotalElements())
+                .listSize(reviewPreViewDTOList.size())
+                .reviewList(reviewPreViewDTOList)
                 .build();
     }
 }

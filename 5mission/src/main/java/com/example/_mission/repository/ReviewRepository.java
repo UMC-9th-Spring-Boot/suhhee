@@ -1,8 +1,9 @@
-// ReviewRepository.java
-
 package com.example._mission.repository;
 
 import com.example._mission.domain.Review;
+import com.example._mission.domain.Store;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -12,4 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ReviewRepository extends JpaRepository<Review, Long>, ReviewQueryDsl {
     // JpaRepository와 ReviewQueryDsl의 모든 메서드를 사용할 수 있음
+
+    //특정 가게 리뷰 목록 페이징해서 가져옴
+    Page<Review> findAllByStore(Store store, Pageable pageable);
 }
