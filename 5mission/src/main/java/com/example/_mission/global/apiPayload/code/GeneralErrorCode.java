@@ -28,6 +28,9 @@ public enum GeneralErrorCode implements BaseErrorCode{
             "AUTH403_1",
             "요청이 거부되었습니다."),
 
+    PAGE_NOT_VALID(HttpStatus.BAD_REQUEST,
+            "PAGE400",
+            "페이지 번호는 1 이상이어야 합니다."),
 
     NOT_FOUND(HttpStatus.NOT_FOUND,
             "COMMON404_1",
@@ -51,3 +54,4 @@ public enum GeneralErrorCode implements BaseErrorCode{
     private final String code;
     private final String message;
 }
+

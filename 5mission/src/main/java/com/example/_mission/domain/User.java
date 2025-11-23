@@ -25,19 +25,15 @@ public class User {
     @Column(nullable = false, length = 20)
     private String userName;
 
+    @Column(length = 20)
+    private String nickname;
+
     @Column(nullable = false, length = 20)
     private String userPw;
 
     @Column(length = 20)
     private String userPhone;
 
-    /*
-    Enum 타입 Gender를 사용
-    @Enumerated(EnumType.STRING)
-    → Enum 이름 자체를 DB에 문자열로 저장
-    (MALE / FEMALE 로 저장됨)
-    → ORDINAL(숫자 저장)을 피하는 것은 유지보수성을 높이기 위함
-     */
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
@@ -50,10 +46,6 @@ public class User {
 
     private LocalDateTime updateAt;
 
-    /*
-    status: 회원의 현재 상태 (ACTIVE, INACTIVE, DELETED 등..)
-    inactiveDate: 비활성화(탈퇴)된 날짜
-     */
     @Column(length = 10)
     private String status;
     private LocalDateTime inactiveDate;

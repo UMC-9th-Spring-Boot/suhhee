@@ -3,6 +3,7 @@ package com.example._mission.repository;
 import com.example._mission.domain.User;
 import com.example._mission.domain.UserMission;
 import com.example._mission.domain.UserMissionId;
+import com.example._mission.domain.enums.MissionStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,4 +21,6 @@ public interface UserMissionRepository extends JpaRepository<UserMission, UserMi
     @Query("SELECT um FROM UserMission um JOIN FETCH um.mission m " +
             "WHERE um.user = :user AND um.totalCount >= m.requiredCount")
     Page<UserMission> findCompletedMissions(@Param("user") User user, Pageable pageable);
+    //유저 + 상태로 조회
+    Page<UserMission> findAllByUserAndStatus(User user, MissionStatus status, Pageable pageable);
 }
