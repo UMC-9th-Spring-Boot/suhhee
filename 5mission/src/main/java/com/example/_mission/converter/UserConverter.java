@@ -3,6 +3,7 @@ package com.example._mission.converter;
 import com.example._mission.domain.FoodCategory;
 import com.example._mission.domain.User;
 import com.example._mission.domain.UserFoodPreference;
+import com.example._mission.domain.enums.Role;
 import com.example._mission.dto.UserReqDTO;
 import com.example._mission.dto.UserResDTO;
 
@@ -13,15 +14,16 @@ import java.util.stream.Collectors;
 public class UserConverter {
 
     // DTO -> Entity (회원가입 요청을 실제 User 엔티티로 변환)
-    public static User toUser(UserReqDTO.JoinDTO dto) {
+    public static User toUser(UserReqDTO.JoinDTO dto, String userPw, Role role) {
 
         return User.builder()
                 .userName(dto.getUserName())
-                .userPw(dto.getUserPw())
+                .userPw(userPw)
+                .role(role)
                 .userPhone(dto.getUserPhone())
                 .gender(dto.getGender())
                 .userBirth(dto.getUserBirth())
-                .userEmail(dto.getUserEmail())
+                .email(dto.getEmail())
                 .createAt(LocalDateTime.now()) // 생성 시간
                 .status("ACTIVE") // 기본 상태 설정
                 .currentPoints(0) // 기본 포인트 설정
@@ -33,6 +35,13 @@ public class UserConverter {
         return UserResDTO.JoinDTO.builder()
                 .userId(user.getId())
                 .createAt(user.getCreateAt())
+                .build();
+    }
+
+    public static UserResDTO.LoginDTO toLoginDTO(User user, String accessToken) {
+        return UserResDTO.LoginDTO.builder()
+                .memberId(user.getId()) // DTO 필드명이 memberId인지 userId인지 확인하세요! (DTO에 맞춤)
+                .accessToken(accessToken)
                 .build();
     }
 }
