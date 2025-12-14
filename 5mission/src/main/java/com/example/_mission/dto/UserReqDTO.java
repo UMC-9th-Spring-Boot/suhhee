@@ -3,6 +3,9 @@ package com.example._mission.dto;
 
 import com.example._mission.global.annotation.ExistFoodCategories;
 import com.example._mission.domain.User; // User 엔티티의 Gender Enum 사용
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,14 +15,25 @@ public class UserReqDTO {
 
     @Getter
     public static class JoinDTO {
+        @NotBlank
         String userName;
+        @Email
+        String email;
+        @NotBlank
         String userPw;
         String userPhone;
-        User.Gender gender; // User 엔티티에 정의된 Gender Enum
+        @NotNull
+        User.Gender gender;
         LocalDateTime userBirth;
-        String userEmail;
 
         @ExistFoodCategories
         List<Long> preferCategory;
     }
+    // 로그인
+    public record LoginDTO(
+            @NotBlank
+            String email,
+            @NotBlank
+            String password
+    ){}
 }

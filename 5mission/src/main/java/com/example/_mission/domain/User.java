@@ -1,5 +1,6 @@
 package com.example._mission.domain;
 
+import com.example._mission.domain.enums.Role;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -28,8 +29,11 @@ public class User {
     @Column(length = 20)
     private String nickname;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false)
     private String userPw;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Column(length = 20)
     private String userPhone;
@@ -39,8 +43,8 @@ public class User {
 
     private LocalDateTime userBirth;
 
-    @Column(length = 100)
-    private String userEmail;
+    @Column(nullable = false, unique = true)
+    private String email;
 
     private LocalDateTime createAt;
 

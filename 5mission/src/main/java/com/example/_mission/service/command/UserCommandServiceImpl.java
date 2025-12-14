@@ -4,6 +4,7 @@ import com.example._mission.converter.UserConverter;
 import com.example._mission.domain.FoodCategory;
 import com.example._mission.domain.User;
 import com.example._mission.domain.UserFoodPreference;
+import com.example._mission.domain.enums.Role;
 import com.example._mission.dto.UserReqDTO;
 import com.example._mission.dto.UserResDTO;
 import com.example._mission.global.apiPayload.code.FoodCategoryErrorCode;
@@ -12,6 +13,7 @@ import com.example._mission.repository.FoodCategoryRepository;
 import com.example._mission.repository.UserFoodPreferenceRepository;
 import com.example._mission.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,7 @@ public class UserCommandServiceImpl implements UserCommandService {
     private final UserRepository userRepository;
     private final UserFoodPreferenceRepository userFoodPreferenceRepository;
     private final FoodCategoryRepository foodCategoryRepository;
+    private final PasswordEncoder passwordEncoder;
 
     // 회원가입
     @Override
@@ -31,8 +34,9 @@ public class UserCommandServiceImpl implements UserCommandService {
     public UserResDTO.JoinDTO signup(
             UserReqDTO.JoinDTO dto
     ){
-        // 사용자 생성
-        User user = UserConverter.toUser(dto);
+        String salt = passwordEncoder.encode(dto.getUserPw());
+        // 사용자 생성: 유저 / 관리자는 따로 API 만들어서 관리
+        User user = UserConverter.toUser(dto, salt, Role.ROLE_USER);
         // DB 적용
         userRepository.save(user);
 
